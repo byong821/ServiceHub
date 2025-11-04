@@ -27,9 +27,11 @@ app.use(
   })
 );
 
-// Routes (to be added)
-// import authRoutes from './routes/auth.js';
-// app.use('/api/auth', authRoutes);
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {
