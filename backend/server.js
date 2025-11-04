@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
-import { connectDB } from './utils/db.js'; // note the .js extension in ESM
+import { connectDB } from './utils/db.js';
 
 dotenv.config();
 
