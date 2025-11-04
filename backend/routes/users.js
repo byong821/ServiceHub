@@ -18,10 +18,12 @@ router.get('/:id', authRequired, async (req, res, next) => {
 
 router.put('/:id', authRequired, async (req, res, next) => {
   try {
-    if (req.session.userId !== String(req.params.id))
+    if (req.session.userId !== String(req.params.id)) {
       return res.status(403).json({ error: 'Forbidden' });
+    }
     const updated = await updateUser(req.params.id, req.body || {});
-    res.json({ user: updated });
+    if (!updated) return res.status(404).json({ error: 'User not found' });
+    res.json({ user: updated }); // <-- return it
   } catch (err) {
     if (err.code === 11000) {
       err.status = 400;
