@@ -1,16 +1,19 @@
-const { ObjectId } = require('mongodb');
-const { getDB } = require('../utils/db');
+// backend/models/bookings.js (ESM)
+import { ObjectId } from 'mongodb';
+import { getDB } from '../utils/db.js';
 
-const COLLECTION_NAME = 'bookings';
+export const COLLECTION_NAME = 'bookings';
 
-const BookingStatus = {
+export const BookingStatus = {
   PENDING: 'pending',
   CONFIRMED: 'confirmed',
   COMPLETED: 'completed',
   CANCELLED: 'cancelled',
 };
 
-const bookingsCollection = () => getDB().collection(COLLECTION_NAME);
+export function bookingsCollection() {
+  return getDB().collection(COLLECTION_NAME);
+}
 
 // Schema structure (for reference, MongoDB is schemaless)
 // {
@@ -27,9 +30,3 @@ const bookingsCollection = () => getDB().collection(COLLECTION_NAME);
 //   createdAt: Date,
 //   updatedAt: Date
 // }
-
-module.exports = {
-  bookingsCollection,
-  BookingStatus,
-  COLLECTION_NAME,
-};
