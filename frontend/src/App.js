@@ -12,6 +12,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import ServiceDetail from './pages/ServiceDetail';
+import BookingsDashboard from './pages/BookingsDashboard';
+import BookingDetail from './pages/BookingDetail';
 
 import './App.css';
 
@@ -26,7 +28,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/me" element={<Profile />} />
-          {/* fallback */}
+          <Route path="/bookings" element={<BookingsDashboard />} />
+          <Route path="/bookings/:id" element={<BookingDetailWrapper />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
@@ -37,6 +40,11 @@ function App() {
 function ServiceDetailWrapper() {
   const { id } = useParams();
   return <ServiceDetail id={id} />;
+}
+
+function BookingDetailWrapper() {
+  const { id } = useParams();
+  return <BookingDetail id={id} />;
 }
 
 export default App;

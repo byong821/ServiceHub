@@ -1,0 +1,45 @@
+.bkCard {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+  background: #fff;
+}
+.bkCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.bkCard__title {
+  margin: 0;
+  font-size: 1rem;
+}
+.bkCard__meta {
+  margin: 0;
+  color: #374151;
+  font-size: 0.95rem;
+}
+.bkCard__status {
+  text-transform: capitalize;
+  font-size: 0.85rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.bkCard__status--pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+.bkCard__status--confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+.bkCard__status--completed {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+.bkCard__status--cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}

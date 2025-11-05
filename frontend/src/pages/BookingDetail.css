@@ -1,0 +1,75 @@
+.bkDetail {
+  display: grid;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+.bkDetail__meta {
+  display: grid;
+  gap: 8px;
+}
+.bkDetail__meta dt {
+  font-weight: 600;
+}
+.bkDetail__meta dd {
+  margin: 0;
+}
+.status {
+  text-transform: capitalize;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+.status--pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+.status--confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+.status--completed {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+.status--cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.bkDetail__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.bkDetail__msgs {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.bkDetail__msgs li {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+}
+.bkDetail__msgs time {
+  display: block;
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.bkDetail__send {
+  display: flex;
+  gap: 8px;
+}
+.bkDetail__send input {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+}
+.error {
+  color: #b91c1c;
+}

@@ -1,0 +1,7 @@
+.bkList {
+  display: grid;
+  gap: 10px;
+}
+.error {
+  color: #b91c1c;
+}

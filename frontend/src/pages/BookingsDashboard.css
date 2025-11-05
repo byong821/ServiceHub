@@ -1,0 +1,56 @@
+.bkDash {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+.bkDash__header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+.tabs button {
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+}
+.tabs button.active {
+  background: #111827;
+  color: #fff;
+}
+.bkDash__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.bkDash__stats > div {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  display: grid;
+}
+.bkDash__stats strong {
+  font-size: 1.2rem;
+}
+.bkDash__stats span {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+@media (max-width: 800px) {
+  .bkDash__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .bkDash__stats {
+    grid-template-columns: 1fr;
+  }
+}
