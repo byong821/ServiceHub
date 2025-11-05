@@ -43,3 +43,12 @@ button:disabled {
 .error {
   color: #b91c1c;
 }
+.svcDetail__rating {
+  color: #f59e0b;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.svcDetail__rating .count {
+  color: #6b7280;
+}

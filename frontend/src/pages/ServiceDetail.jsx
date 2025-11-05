@@ -60,6 +60,18 @@ export default function ServiceDetail({ id, canEdit = false, onDeleted }) {
   return (
     <section className="svcDetail">
       <h2>{svc.title}</h2>
+      <p
+        className="svcDetail__rating"
+        aria-label={`Rating ${svc.averageRating ?? 0} of 5`}
+      >
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span key={i} aria-hidden="true">
+            {i < Math.round(svc.averageRating ?? 0) ? '★' : '☆'}
+          </span>
+        ))}
+        <span className="count">({svc.reviewsCount ?? 0})</span>
+      </p>
+
       <p className="svcDetail__desc">{svc.description}</p>
       <dl className="svcDetail__meta">
         <div>

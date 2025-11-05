@@ -11,6 +11,20 @@ export default function ServiceCard({ service, onClick }) {
       onKeyDown={(e) => e.key === 'Enter' && onClick?.(service)}
     >
       <header className="svcCard__header">
+        <div
+          className="svcCard__rating"
+          aria-label={`Rating ${service.averageRating ?? 0} of 5`}
+        >
+          {Array.from({ length: 5 }).map((_, i) => (
+            <span key={i} aria-hidden="true">
+              {i < Math.round(service.averageRating ?? 0) ? '★' : '☆'}
+            </span>
+          ))}
+          <span className="svcCard__ratingCount">
+            ({service.reviewsCount ?? 0})
+          </span>
+        </div>
+
         <h3 className="svcCard__title">{service.title}</h3>
         {service.isEmergency && <span className="svcCard__badge">⚡</span>}
       </header>

@@ -35,3 +35,14 @@
   color: #6b7280;
   font-size: 0.9rem;
 }
+
+.svcCard__rating {
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.svcCard__ratingCount {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
