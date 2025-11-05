@@ -1,7 +1,13 @@
 // src/App.js
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Header from './components/Header'; // you already have this
-import Home from './pages/Home'; // we'll add these pages next
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+} from 'react-router-dom';
+import Header from './components/Header';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
@@ -28,9 +34,8 @@ function App() {
   );
 }
 
-// Minimal wrapper so ServiceDetail gets the :id param even before you set up hooks inside it
 function ServiceDetailWrapper() {
-  const id = window.location.pathname.split('/').pop();
+  const { id } = useParams();
   return <ServiceDetail id={id} />;
 }
 

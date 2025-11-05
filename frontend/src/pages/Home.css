@@ -1,0 +1,21 @@
+.home {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+.home__filters {
+  display: grid;
+  grid-template-columns: 1fr 160px 120px 120px;
+  gap: 8px;
+}
+.home__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.home__left,
+.home__right {
+  display: grid;
+  gap: 12px;
+}

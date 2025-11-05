@@ -1,0 +1,45 @@
+.svcDetail {
+  display: grid;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+.svcDetail__desc {
+  margin: 0;
+  color: #374151;
+}
+.svcDetail__meta {
+  display: grid;
+  gap: 8px;
+}
+.svcDetail__meta dt {
+  font-weight: 600;
+}
+.svcDetail__meta dd {
+  margin: 0;
+  color: #374151;
+}
+.svcDetail__actions {
+  display: flex;
+  gap: 8px;
+}
+button {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.danger {
+  background: #b91c1c;
+  color: #fff;
+}
+.error {
+  color: #b91c1c;
+}

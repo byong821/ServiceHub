@@ -1,0 +1,33 @@
+.svcForm {
+  display: grid;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+.svcForm label {
+  display: grid;
+  gap: 6px;
+  font-weight: 500;
+}
+.svcForm input,
+.svcForm textarea,
+.svcForm select {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.chk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.error {
+  color: #b91c1c;
+}

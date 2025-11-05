@@ -1,0 +1,37 @@
+.svcCard {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+  background: #fff;
+}
+.svcCard__header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.svcCard__title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.svcCard__badge {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+.svcCard__desc {
+  margin: 0;
+  color: #374151;
+  line-height: 1.35;
+  max-height: 3.2em;
+  overflow: hidden;
+}
+.svcCard__meta {
+  display: flex;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
