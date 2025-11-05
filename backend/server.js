@@ -30,12 +30,6 @@ app.use(
   })
 );
 
-// temp request logger
-app.use((req, _res, next) => {
-  console.log(req.method, req.path, 'userId=', req.session?.userId || null);
-  next();
-});
-
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/services', serviceRoutes);
