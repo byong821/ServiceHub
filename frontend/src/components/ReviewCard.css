@@ -1,0 +1,66 @@
+.reviewCard {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.reviewCard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.reviewCard__rating {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.star {
+  color: #ffc107;
+  font-size: var(--font-size-lg);
+}
+
+.reviewCard__date {
+  color: var(--secondary-color);
+  font-size: var(--font-size-sm);
+}
+
+.reviewCard__comment {
+  margin: var(--spacing-sm) 0;
+  line-height: 1.5;
+}
+
+.reviewCard__response {
+  background: var(--light-color);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  margin-top: var(--spacing-sm);
+}
+
+.reviewCard__response strong {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--primary-color);
+}
+
+.reviewCard__response p {
+  margin: 0;
+}
+
+.reviewCard__respondBtn {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+
+.reviewCard__respondBtn:hover {
+  opacity: 0.9;
+}
