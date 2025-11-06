@@ -1,0 +1,12 @@
+.bookingsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .bookingsList {
+    grid-template-columns: 1fr;
+  }
+}
