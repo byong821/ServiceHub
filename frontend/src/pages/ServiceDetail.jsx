@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { api } from '../services/api';
 import Loading from '../components/Loading';
+import ReviewsList from './ReviewsList';
 import './ServiceDetail.css';
 
 export default function ServiceDetail({ id, canEdit = false, onDeleted }) {
@@ -103,6 +104,11 @@ export default function ServiceDetail({ id, canEdit = false, onDeleted }) {
           </button>
         </div>
       )}
+
+      <section className="svcDetail__reviews">
+        <h3>Reviews</h3>
+        <ReviewsList serviceId={id} />
+      </section>
     </section>
   );
 }

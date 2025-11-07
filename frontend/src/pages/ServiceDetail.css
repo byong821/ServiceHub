@@ -52,3 +52,12 @@ button:disabled {
 .svcDetail__rating .count {
   color: #6b7280;
 }
+.svcDetail__reviews {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+.svcDetail__reviews h3 {
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
