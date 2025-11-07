@@ -80,10 +80,18 @@ const Profile = ({ user, onUpdate }) => {
           </form>
         ) : (
           <div className="profile-view">
-            <p><strong>Username:</strong> {user.username}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Major:</strong> {user.major || 'Not set'}</p>
-            <p><strong>Graduation Year:</strong> {user.gradYear || 'Not set'}</p>
+            <p>
+              <strong>Username:</strong> {user.username}
+            </p>
+            <p>
+              <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>Major:</strong> {user.major || 'Not set'}
+            </p>
+            <p>
+              <strong>Graduation Year:</strong> {user.gradYear || 'Not set'}
+            </p>
             <button onClick={() => setIsEditing(true)} className="profile-btn">
               Edit Profile
             </button>

@@ -13,7 +13,10 @@ export default function ReviewCard({ review, canRespond, onRespond }) {
   return (
     <article className="reviewCard">
       <header className="reviewCard__header">
-        <div className="reviewCard__rating" aria-label={`Rating ${review.rating} of 5`}>
+        <div
+          className="reviewCard__rating"
+          aria-label={`Rating ${review.rating} of 5`}
+        >
           {renderStars(review.rating)}
         </div>
         <time className="reviewCard__date">
@@ -31,7 +34,10 @@ export default function ReviewCard({ review, canRespond, onRespond }) {
       )}
 
       {canRespond && !review.providerResponse && (
-        <button onClick={() => onRespond?.(review)} className="reviewCard__respondBtn">
+        <button
+          onClick={() => onRespond?.(review)}
+          className="reviewCard__respondBtn"
+        >
           Respond
         </button>
       )}

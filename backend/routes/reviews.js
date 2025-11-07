@@ -20,13 +20,19 @@ router.post('/', requireAuth, async (req, res, next) => {
     });
 
     if (!booking) {
-      return res.status(403).json({ error: 'Can only review completed bookings' });
+      return res
+        .status(403)
+        .json({ error: 'Can only review completed bookings' });
     }
 
     // Check if review already exists
-    const existing = await reviewsCollection().findOne({ bookingId: new ObjectId(bookingId) });
+    const existing = await reviewsCollection().findOne({
+      bookingId: new ObjectId(bookingId),
+    });
     if (existing) {
-      return res.status(409).json({ error: 'Review already exists for this booking' });
+      return res
+        .status(409)
+        .json({ error: 'Review already exists for this booking' });
     }
 
     const review = {
@@ -72,7 +78,13 @@ router.get('/service/:serviceId', async (req, res, next) => {
       ? allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length
       : 0;
 
-    res.json({ reviews, total, averageRating, page: Number(page), limit: Number(limit) });
+    res.json({
+      reviews,
+      total,
+      averageRating,
+      page: Number(page),
+      limit: Number(limit),
+    });
   } catch (error) {
     next(error);
   }
@@ -107,7 +119,9 @@ router.put('/:id', requireAuth, async (req, res, next) => {
     const { rating, comment } = req.body;
     const userId = req.session.userId;
 
-    const review = await reviewsCollection().findOne({ _id: new ObjectId(req.params.id) });
+    const review = await reviewsCollection().findOne({
+      _id: new ObjectId(req.params.id),
+    });
     if (!review) {
       return res.status(404).json({ error: 'Review not found' });
     }
@@ -133,7 +147,9 @@ router.post('/:id/response', requireAuth, async (req, res, next) => {
     const { response } = req.body;
     const userId = req.session.userId;
 
-    const review = await reviewsCollection().findOne({ _id: new ObjectId(req.params.id) });
+    const review = await reviewsCollection().findOne({
+      _id: new ObjectId(req.params.id),
+    });
     if (!review) {
       return res.status(404).json({ error: 'Review not found' });
     }
