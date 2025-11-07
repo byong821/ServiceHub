@@ -5,7 +5,12 @@ import ReviewCard from '../components/ReviewCard';
 import Loading from '../components/Loading';
 import './ReviewsList.css';
 
-export default function ReviewsList({ serviceId, providerId, canRespond, onRespond }) {
+export default function ReviewsList({
+  serviceId,
+  providerId,
+  canRespond,
+  onRespond,
+}) {
   const [reviews, setReviews] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
   const [loading, setLoading] = useState(false);

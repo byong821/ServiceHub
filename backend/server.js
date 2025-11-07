@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
 import { connectDB } from './utils/db.js';
+import { createIndexes } from './utils/createIndexes.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import serviceRoutes from './routes/services.js';
@@ -58,6 +59,7 @@ app.use((_req, res) => res.status(404).json({ error: 'Route not found' }));
 const startServer = async () => {
   try {
     await connectDB();
+    await createIndexes();
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });

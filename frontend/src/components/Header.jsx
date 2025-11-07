@@ -17,8 +17,12 @@ const Header = ({ user, onLogout }) => {
             </>
           ) : (
             <>
-              <a href="/login" className="header-link">Login</a>
-              <a href="/register" className="header-link">Register</a>
+              <a href="/login" className="header-link">
+                Login
+              </a>
+              <a href="/register" className="header-link">
+                Register
+              </a>
             </>
           )}
         </nav>

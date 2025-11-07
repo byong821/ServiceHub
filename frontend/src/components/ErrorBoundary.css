@@ -1,0 +1,33 @@
+.errorBoundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+.errorBoundary h2 {
+  color: var(--danger-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.errorBoundary p {
+  margin-bottom: var(--spacing-lg);
+  color: var(--secondary-color);
+}
+
+.errorBoundary button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+}
+
+.errorBoundary button:hover {
+  opacity: 0.9;
+}
