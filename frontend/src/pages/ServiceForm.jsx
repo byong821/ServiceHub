@@ -1,3 +1,4 @@
+// frontend/src/pages/ServiceForm.jsx
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { api } from '../services/api';
@@ -15,21 +16,18 @@ export default function ServiceForm({ onCreated }) {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
-  const onChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((f) => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
-  };
+  const update = (k, v) => setForm((s) => ({ ...s, [k]: v }));
 
   const submit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setErr('');
+    setLoading(true);
     try {
-      const { service } = await api.post('/services', {
+      await api.post('/api/services', {
         ...form,
-        hourlyRate: Number(form.hourlyRate) || 0,
+        hourlyRate: Number(form.hourlyRate),
       });
-      onCreated?.(service);
+      setLoading(false);
       setForm({
         title: '',
         description: '',
@@ -38,74 +36,116 @@ export default function ServiceForm({ onCreated }) {
         location: '',
         isEmergency: false,
       });
-    } catch (e2) {
-      setErr(e2.message);
-    } finally {
+      onCreated?.();
+    } catch (error) {
       setLoading(false);
+      setErr(error.message || 'Failed to create');
     }
   };
 
   return (
-    <form className="svcForm" onSubmit={submit}>
-      <h2>Create service</h2>
+    <form
+      className="serviceForm serviceForm__card"
+      onSubmit={submit}
+      noValidate
+    >
+      <h3>Create service</h3>
+
       {err && (
-        <p className="error" role="alert">
+        <div className="serviceForm__hint" style={{ color: 'var(--danger)' }}>
           {err}
-        </p>
+        </div>
       )}
-      <label>
-        Title
-        <input name="title" value={form.title} onChange={onChange} required />
-      </label>
-      <label>
-        Description
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={onChange}
-          rows={3}
+
+      <div>
+        <label htmlFor="title">Title</label>
+        <input
+          id="title"
+          className="input"
+          placeholder="e.g., iPhone screen repair"
+          value={form.title}
+          onChange={(e) => update('title', e.target.value)}
+          required
         />
-      </label>
-      <div className="grid2">
-        <label>
-          Category
-          <select name="category" value={form.category} onChange={onChange}>
+      </div>
+
+      <div>
+        <label htmlFor="desc">Description</label>
+        <textarea
+          id="desc"
+          className="textarea"
+          placeholder="What’s included? Any requirements?"
+          value={form.description}
+          onChange={(e) => update('description', e.target.value)}
+        />
+      </div>
+
+      <div className="serviceForm__row">
+        <div>
+          <label htmlFor="cat">Category</label>
+          <select
+            id="cat"
+            className="select"
+            value={form.category}
+            onChange={(e) => update('category', e.target.value)}
+          >
             <option value="tech">Tech</option>
             <option value="tutoring">Tutoring</option>
             <option value="moving">Moving</option>
             <option value="photo">Photography</option>
           </select>
-        </label>
-        <label>
-          Hourly Rate ($)
+        </div>
+
+        <div>
+          <label htmlFor="rate">Hourly Rate ($)</label>
           <input
+            id="rate"
+            className="input"
             type="number"
-            name="hourlyRate"
-            value={form.hourlyRate}
-            onChange={onChange}
             min="0"
+            value={form.hourlyRate}
+            onChange={(e) => update('hourlyRate', e.target.value)}
+            required
           />
-        </label>
+        </div>
       </div>
-      <div className="grid2">
-        <label>
-          Location
-          <input name="location" value={form.location} onChange={onChange} />
-        </label>
-        <label className="chk">
+
+      <div className="serviceForm__row serviceForm__row--compact">
+        <div>
+          <label htmlFor="loc">Location</label>
           <input
+            id="loc"
+            className="input"
+            placeholder="e.g., Northeastern"
+            value={form.location}
+            onChange={(e) => update('location', e.target.value)}
+          />
+        </div>
+
+        <div className="serviceForm__inline" style={{ alignSelf: 'end' }}>
+          <input
+            id="urgent"
             type="checkbox"
-            name="isEmergency"
             checked={form.isEmergency}
-            onChange={onChange}
-          />{' '}
-          Emergency
-        </label>
+            onChange={(e) => update('isEmergency', e.target.checked)}
+          />
+          <label htmlFor="urgent">Emergency</label>
+        </div>
       </div>
-      <button type="submit" disabled={loading}>
-        {loading ? 'Saving…' : 'Create'}
-      </button>
+
+      <div className="serviceForm__footer">
+        <button
+          type="submit"
+          className="button button--primary"
+          disabled={loading}
+        >
+          {loading ? 'Creating…' : 'Create'}
+        </button>
+      </div>
     </form>
   );
 }
-ServiceForm.propTypes = { onCreated: PropTypes.func };
+
+ServiceForm.propTypes = {
+  onCreated: PropTypes.func,
+};

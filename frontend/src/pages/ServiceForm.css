@@ -1,33 +1,78 @@
-.svcForm {
+/* frontend/src/pages/ServiceForm.css */
+@import '../styles/variables.css';
+
+.serviceForm {
   display: grid;
-  gap: 10px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  gap: 12px;
+}
+
+.serviceForm__card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
   padding: 16px;
 }
-.svcForm label {
-  display: grid;
-  gap: 6px;
-  font-weight: 500;
+
+.serviceForm h3 {
+  margin: 0 0 8px;
+  font-size: var(--h3);
 }
-.svcForm input,
-.svcForm textarea,
-.svcForm select {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 8px;
+
+.serviceForm label {
+  display: block;
+  font-size: var(--label);
+  color: var(--text-muted);
+  margin-bottom: 6px;
 }
-.grid2 {
+
+.serviceForm .input,
+.serviceForm .textarea,
+.serviceForm .select {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #0f1420;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.serviceForm .textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.serviceForm__row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 140px;
   gap: 10px;
 }
-.chk {
+
+.serviceForm__row--compact {
+  grid-template-columns: 1fr 1fr;
+}
+
+.serviceForm__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.serviceForm__inline {
   display: flex;
   align-items: center;
   gap: 8px;
+  color: var(--text-muted);
 }
-.error {
-  color: #b91c1c;
+
+.serviceForm__hint {
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+
+/* Avoid white checkbox on some browsers */
+.serviceForm input[type='checkbox'] {
+  accent-color: var(--brand);
 }

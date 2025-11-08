@@ -1,52 +1,44 @@
+/* frontend/src/components/Header.css */
+@import '../styles/variables.css';
+
 .header {
-  background-color: var(--dark-color);
-  color: white;
-  padding: var(--spacing-md);
-  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: saturate(120%) blur(8px);
+  background: color-mix(in oklab, var(--bg) 86%, transparent);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
 }
 
 .header-logo {
-  font-size: var(--font-size-xl);
-  margin: 0;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.2px;
 }
 
 .header-nav {
   display: flex;
-  gap: var(--spacing-md);
   align-items: center;
+  gap: 10px;
 }
 
 .header-user {
-  color: var(--light-color);
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-right: 6px;
 }
 
-.header-link {
-  color: white;
-  text-decoration: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-}
-
-.header-link:hover {
-  text-decoration: underline;
-}
-
-.header-btn {
-  background-color: var(--danger-color);
-  color: white;
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius);
-  cursor: pointer;
-}
-
-.header-btn:hover {
-  opacity: 0.9;
+/* Ensure header actions never look white (use shared .button styles) */
+.header .button {
+  height: 36px;
+  line-height: 1;
+  padding: 8px 12px;
 }

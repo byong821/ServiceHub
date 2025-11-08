@@ -145,3 +145,31 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+.chip--pending {
+  background: #fff7ed;
+  color: #b45309;
+  border-color: #fde68a;
+}
+.chip--confirmed {
+  background: #ecfeff;
+  color: #0e7490;
+  border-color: #a5f3fc;
+}
+.chip--completed {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #6ee7b7;
+}
+.chip--cancelled {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}

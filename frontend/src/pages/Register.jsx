@@ -1,104 +1,131 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import './Register.css';
 
-const Register = ({ onRegisterSuccess }) => {
-  const [formData, setFormData] = useState({
+export default function Register({ onRegistered }) {
+  const [form, setForm] = useState({
     username: '',
     email: '',
     password: '',
     major: '',
     gradYear: '',
   });
-  const [error, setError] = useState('');
+  const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const update = (k, v) => setForm((s) => ({ ...s, [k]: v }));
 
-  const handleSubmit = async (e) => {
+  async function submit(e) {
     e.preventDefault();
-    setError('');
-
-    if (!formData.email.endsWith('.edu')) {
-      setError('Must use a .edu email address');
-      return;
-    }
-
+    setErr('');
     setLoading(true);
     try {
-      const data = await api.post('/api/auth/register', formData);
-      onRegisterSuccess(data.user);
-    } catch (err) {
-      setError(err.message);
+      const res = await api.post('/api/auth/register', {
+        ...form,
+        gradYear: Number(form.gradYear || 0),
+      });
+      onRegistered?.(res.user);
+      navigate('/');
+    } catch (error) {
+      setErr(error.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
-    <div className="register-container">
-      <form className="register-form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
-        {error && <div className="register-error">{error}</div>}
+    <main className="auth">
+      <form className="auth__card" onSubmit={submit} noValidate>
+        <h2 className="auth__title">Register</h2>
+
+        {err && <div className="auth__error">{err}</div>}
+
+        <label htmlFor="username" className="auth__label">
+          Username
+        </label>
         <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
+          id="username"
+          className="input"
+          value={form.username}
+          onChange={(e) => update('username', e.target.value)}
           required
-          className="register-input"
         />
+
+        <label htmlFor="email" className="auth__label">
+          Email (.edu required)
+        </label>
         <input
+          id="email"
+          className="input"
           type="email"
-          name="email"
-          placeholder="Email (.edu required)"
-          value={formData.email}
-          onChange={handleChange}
+          placeholder="you@university.edu"
+          value={form.email}
+          onChange={(e) => update('email', e.target.value)}
           required
-          className="register-input"
         />
+
+        <label htmlFor="password" className="auth__label">
+          Password
+        </label>
         <input
+          id="password"
+          className="input"
           type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          placeholder="••••••••"
+          value={form.password}
+          onChange={(e) => update('password', e.target.value)}
           required
-          minLength="6"
-          className="register-input"
         />
-        <input
-          type="text"
-          name="major"
-          placeholder="Major"
-          value={formData.major}
-          onChange={handleChange}
-          className="register-input"
-        />
-        <input
-          type="number"
-          name="gradYear"
-          placeholder="Graduation Year"
-          value={formData.gradYear}
-          onChange={handleChange}
-          min="2024"
-          max="2030"
-          className="register-input"
-        />
-        <button type="submit" disabled={loading} className="register-btn">
-          {loading ? 'Registering...' : 'Register'}
+
+        <div className="auth__row">
+          <div>
+            <label htmlFor="major" className="auth__label">
+              Major
+            </label>
+            <input
+              id="major"
+              className="input"
+              value={form.major}
+              onChange={(e) => update('major', e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="gradYear" className="auth__label">
+              Graduation Year
+            </label>
+            <input
+              id="gradYear"
+              className="input"
+              type="number"
+              min="1900"
+              max="2100"
+              value={form.gradYear}
+              onChange={(e) => update('gradYear', e.target.value)}
+            />
+          </div>
+        </div>
+
+        <button
+          className="button button--primary auth__submit"
+          disabled={loading}
+        >
+          {loading ? 'Creating account…' : 'Create account'}
         </button>
+
+        <p className="auth__hint">
+          Already have an account?{' '}
+          <a className="link" href="/login">
+            Log in
+          </a>
+        </p>
       </form>
-    </div>
+    </main>
   );
-};
+}
 
 Register.propTypes = {
-  onRegisterSuccess: PropTypes.func.isRequired,
+  onRegistered: PropTypes.func,
 };
-
-export default Register;

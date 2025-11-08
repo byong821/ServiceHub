@@ -1,21 +1,73 @@
-.home {
-  display: grid;
-  gap: 16px;
-  padding: 16px;
+/* Hero with subtle brand glow */
+.hero {
+  padding: var(--space-6) 0;
+  background: radial-gradient(
+    1200px 240px at 50% -40px,
+    color-mix(in oklab, var(--brand) 18%, transparent) 0%,
+    transparent 60%
+  );
 }
-.home__filters {
+.hero__inner {
   display: grid;
-  grid-template-columns: 1fr 160px 120px 120px;
-  gap: 8px;
+  gap: var(--space-4);
 }
+
+/* Search / Filters row */
+.searchBar {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 0.6fr 0.6fr;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Main section wrapper */
+.section {
+  padding: var(--space-6) 0;
+}
+
+/* Two-column layout */
 .home__grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
-  align-items: start;
+  grid-template-columns: 1.6fr 0.9fr;
+  gap: var(--space-6);
 }
-.home__left,
+
+/* Left column */
+.home__left {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Right column (form, CTA) */
 .home__right {
   display: grid;
-  gap: 12px;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+/* Section headers */
+.home__sectionHeader {
+  display: grid;
+  gap: 4px;
+}
+
+/* Emergency CTA */
+.home__emergency {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .searchBar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .home__grid {
+    grid-template-columns: 1fr;
+  }
 }
