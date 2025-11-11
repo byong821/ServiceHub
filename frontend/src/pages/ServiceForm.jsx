@@ -11,7 +11,7 @@ export default function ServiceForm({ onCreated }) {
     category: 'tech',
     hourlyRate: 20,
     location: '',
-    isEmergency: false,
+    // isEmergency removed
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
@@ -23,23 +23,27 @@ export default function ServiceForm({ onCreated }) {
     setErr('');
     setLoading(true);
     try {
+      // no isEmergency in the payload
       await api.post('/api/services', {
-        ...form,
+        title: form.title,
+        description: form.description,
+        category: form.category,
         hourlyRate: Number(form.hourlyRate),
+        location: form.location,
       });
-      setLoading(false);
+
       setForm({
         title: '',
         description: '',
         category: 'tech',
         hourlyRate: 20,
         location: '',
-        isEmergency: false,
       });
       onCreated?.();
     } catch (error) {
-      setLoading(false);
       setErr(error.message || 'Failed to create');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -110,27 +114,15 @@ export default function ServiceForm({ onCreated }) {
         </div>
       </div>
 
-      <div className="serviceForm__row serviceForm__row--compact">
-        <div>
-          <label htmlFor="loc">Location</label>
-          <input
-            id="loc"
-            className="input"
-            placeholder="e.g., Northeastern"
-            value={form.location}
-            onChange={(e) => update('location', e.target.value)}
-          />
-        </div>
-
-        <div className="serviceForm__inline" style={{ alignSelf: 'end' }}>
-          <input
-            id="urgent"
-            type="checkbox"
-            checked={form.isEmergency}
-            onChange={(e) => update('isEmergency', e.target.checked)}
-          />
-          <label htmlFor="urgent">Emergency</label>
-        </div>
+      <div>
+        <label htmlFor="loc">Location</label>
+        <input
+          id="loc"
+          className="input"
+          placeholder="e.g., Northeastern"
+          value={form.location}
+          onChange={(e) => update('location', e.target.value)}
+        />
       </div>
 
       <div className="serviceForm__footer">

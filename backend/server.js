@@ -8,11 +8,33 @@ import userRoutes from './routes/users.js';
 import serviceRoutes from './routes/services.js';
 import bookingRoutes from './routes/bookings.js';
 import reviewRoutes from './routes/reviews.js';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+
+app.set('trust proxy', 1);
+
+// CORS must allow the exact frontend origin and credentials
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // your React dev server
+    credentials: true, // allow cookies
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'X-Requested-With'],
+  })
+);
+
+// Handle preflight quickly (helps some proxies/tools)
+app.options(
+  '*',
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
 
 // Middleware
 app.use(express.json());

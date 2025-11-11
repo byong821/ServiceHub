@@ -1,3 +1,4 @@
+// src/pages/Home.jsx
 import { useState, useEffect } from 'react';
 import ServiceList from './ServiceList';
 import ServiceForm from './ServiceForm';
@@ -9,8 +10,8 @@ export default function Home() {
   const [category, setCategory] = useState('');
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
+  const [refreshId, setRefreshId] = useState(0); // 👈 add this
 
-  // Proper debounce with useEffect and full deps
   useEffect(() => {
     const t = setTimeout(() => setDebouncedQuery(query), 250);
     return () => clearTimeout(t);
@@ -93,6 +94,7 @@ export default function Home() {
               category={category}
               min={min}
               max={max}
+              refreshId={refreshId}
             />
           </div>
 
@@ -105,19 +107,8 @@ export default function Home() {
             </div>
 
             <div className="card" style={{ padding: 16 }}>
-              <ServiceForm
-                onCreated={() => {
-                  // Optionally: refresh the list by lifting state up or toggling a key
-                }}
-              />
+              <ServiceForm onCreated={() => setRefreshId((n) => n + 1)} />
             </div>
-
-            <a
-              className="home__emergency button button--primary"
-              href="/emergency"
-            >
-              ⚡ View last-minute requests
-            </a>
           </aside>
         </div>
       </section>

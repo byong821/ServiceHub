@@ -55,13 +55,6 @@
   gap: 4px;
 }
 
-/* Emergency CTA */
-.home__emergency {
-  width: 100%;
-  justify-content: center;
-  text-align: center;
-}
-
 /* Responsive adjustments */
 @media (max-width: 960px) {
   .searchBar {
