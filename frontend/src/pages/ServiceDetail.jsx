@@ -1,12 +1,11 @@
 // src/pages/ServiceDetail.jsx
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { api } from '../services/api';
 import './ServiceDetail.css';
 
 export default function ServiceDetail() {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const [svc, setSvc] = useState(null);
   const [provider, setProvider] = useState(null);
