@@ -37,17 +37,14 @@ The goal is to create a trusted, student-only marketplace that makes it easy to 
 
 ## 📸 Screenshots
 
-### Home Page - Browse Services
-![Home Page](https://via.placeholder.com/800x500/4CAF50/FFFFFF?text=Home+Page+Screenshot)
-<!-- Replace with actual screenshot: /screenshots/home.png -->
+### Home Page
+![Home Page](./screenshot1.png)
 
-### Service Detail Page
-![Service Detail](https://via.placeholder.com/800x500/4CAF50/FFFFFF?text=Service+Detail+Screenshot)
-<!-- Replace with actual screenshot: /screenshots/service-detail.png -->
+### Service Detail
+![Service Detail](./screenshot3.png)
 
-### My Listings Dashboard
-![My Listings](https://via.placeholder.com/800x500/4CAF50/FFFFFF?text=My+Listings+Screenshot)
-<!-- Replace with actual screenshot: /screenshots/profile.png -->
+### My Listings
+![My Listings](./screenshot2.png)
 
 ---
 
