@@ -30,10 +30,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 24h
+      maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'lax' : 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     },
   })
 );
@@ -48,20 +48,22 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', message: 'ServiceHub API is running' });
 });
 
-// Optional: 404 for unknown API paths (do this BEFORE SPA catch-all)
+// 404 for unknown API paths
 app.use('/api', (_req, res) =>
   res.status(404).json({ error: 'Route not found' })
 );
 
-// ---------- Serve React in production (same origin) ----------
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const clientBuild = path.join(__dirname, '../frontend/build');
+// ---------- Serve React in production ONLY ----------
+if (process.env.NODE_ENV === 'production') {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const clientBuild = path.join(__dirname, '../frontend/build');
 
-app.use(express.static(clientBuild));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(clientBuild, 'index.html'));
-});
+  app.use(express.static(clientBuild));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuild, 'index.html'));
+  });
+}
 
 // ---------- bootstrap ----------
 async function startServer() {
