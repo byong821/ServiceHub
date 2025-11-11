@@ -1,46 +1,59 @@
-// frontend/src/components/Header.jsx
-import React from 'react';
-import PropTypes from 'prop-types';
+// src/components/Header.jsx
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 import './Header.css';
 
-const Header = ({ user, onLogout }) => {
+export default function Header() {
+  const { user, logout, loadingUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
+
   return (
     <header className="header">
-      <div className="header-container container">
-        <a className="header-logo" href="/">
-          ● ServiceHub
-        </a>
+      <div className="header__inner">
+        <Link to="/" className="brand">
+          ServiceHub
+        </Link>
 
-        <nav className="header-nav" aria-label="Primary">
-          {user ? (
+        {/* left nav */}
+        <nav className="nav">
+          <Link to="/" className="nav__link">
+            Home
+          </Link>
+          {user && (
+            <Link to="/me" className="nav__link">
+              My Listings
+            </Link>
+          )}
+        </nav>
+
+        {/* right side */}
+        <div className="header__right">
+          {loadingUser ? (
+            <div className="header__skeleton" />
+          ) : user ? (
             <>
-              <span className="header-user">Hi, {user.username}</span>
-              <button onClick={onLogout} className="button button--ghost">
-                Logout
+              <span className="greet">Hi, {user.username}</span>
+              <button className="btn btn--ghost" onClick={handleLogout}>
+                Sign out
               </button>
             </>
           ) : (
             <>
-              <a href="/login" className="button button--ghost">
+              <Link to="/login" className="btn btn--ghost">
                 Log in
-              </a>
-              <a href="/register" className="button button--primary">
+              </Link>
+              <Link to="/register" className="btn btn--primary">
                 Join
-              </a>
+              </Link>
             </>
           )}
-        </nav>
+        </div>
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    email: PropTypes.string,
-  }),
-  onLogout: PropTypes.func.isRequired,
-};
-
-export default Header;
+}

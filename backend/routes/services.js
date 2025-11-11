@@ -8,6 +8,7 @@ import {
   deleteService,
   searchServices,
 } from '../models/services.js';
+import { ObjectId } from 'mongodb';
 
 const router = Router();
 
@@ -68,6 +69,57 @@ router.delete('/:id', authRequired, async (req, res, next) => {
     res.json({ ok: true });
   } catch (err) {
     next(err);
+  }
+});
+
+router.get('/mine', authRequired, async (req, res, next) => {
+  try {
+    const userId = req.session.userId;
+    const col = getDB().collection('services');
+    const items = await col
+      .find({
+        providerId: new ObjectId(userId),
+        status: { $ne: 'deleted' },
+      })
+      .sort({ updatedAt: -1 })
+      .toArray();
+
+    res.json({ items });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/services/mine  (must be logged in)
+router.get('/mine', authRequired, async (req, res, next) => {
+  try {
+    const { page = 1, limit = 12 } = req.query;
+    const result = await listServicesByProvider(req.session.userId, {
+      page,
+      limit,
+    });
+    res.json(result);
+  } catch (e) {
+    next(e);
+  }
+});
+
+// Existing browse route should pass providerId through:
+router.get('/', async (req, res, next) => {
+  try {
+    const { q, category, min, max, page, limit, providerId } = req.query;
+    const result = await searchServices({
+      q,
+      category,
+      min,
+      max,
+      page,
+      limit,
+      providerId,
+    });
+    res.json(result);
+  } catch (e) {
+    next(e);
   }
 });
 

@@ -1,85 +1,71 @@
+// src/components/ServiceCard.jsx
 import PropTypes from 'prop-types';
 import './ServiceCard.css';
 
-export default function ServiceCard({ service, onClick, onQuickBook }) {
-  const rounded = Math.round(service.averageRating ?? 0);
-  const ratingLabel =
-    service.averageRating != null
-      ? `Rating ${service.averageRating.toFixed(1)} of 5`
-      : 'No ratings yet';
-
+export default function ServiceCard({ service, onClick, hideActions = false }) {
   return (
     <article
-      className="serviceCard card"
-      aria-labelledby={`svc-title-${service._id}`}
-      onClick={(e) => {
-        if (!(e.target.closest('button') || e.target.closest('a'))) {
-          onClick?.(service);
-        }
-      }}
+      className="svcCard"
+      tabIndex={0}
+      onClick={() => onClick?.(service)}
+      onKeyDown={(e) => e.key === 'Enter' && onClick?.(service)}
     >
-      <header className="serviceCard__top">
-        <h3 id={`svc-title-${service._id}`} className="serviceCard__title">
-          {service.title}
-        </h3>
-
+      <header className="svcCard__header">
         <div
-          className="serviceCard__price"
-          aria-label={`Price ${service.hourlyRate} dollars per hour`}
+          className="svcCard__rating"
+          aria-label={`Rating ${service.averageRating ?? 0} of 5`}
         >
-          ${service.hourlyRate}/hr
-        </div>
-      </header>
-
-      <div className="serviceCard__meta">
-        <span className="tag">{service.category}</span>
-        {service.isEmergency && (
-          <span className="tag tag--danger">Emergency</span>
-        )}
-        <span className="serviceCard__rating" aria-label={ratingLabel}>
           {Array.from({ length: 5 }).map((_, i) => (
             <span key={i} aria-hidden="true">
-              {i < rounded ? '★' : '☆'}
+              {i < Math.round(service.averageRating ?? 0) ? '★' : '☆'}
             </span>
           ))}
-          <span className="serviceCard__ratingCount">
-            {service.averageRating != null
-              ? service.averageRating.toFixed(1)
-              : '–'}{' '}
+          <span className="svcCard__ratingCount">
             ({service.reviewsCount ?? 0})
           </span>
+        </div>
+
+        <h3 className="svcCard__title">{service.title}</h3>
+        {service.isEmergency && <span className="svcCard__badge">⚡</span>}
+      </header>
+
+      <p className="svcCard__desc">{service.description}</p>
+
+      <div className="svcCard__meta">
+        <span className="chip">{service.category || '—'}</span>
+        <span className="svcCard__rate">${service.hourlyRate}/hr</span>
+        <span className="svcCard__dot" aria-hidden="true">
+          •
         </span>
-        {service.location && (
-          <span className="serviceCard__location">• {service.location}</span>
-        )}
+        <span className="svcCard__loc">{service.location || '—'}</span>
       </div>
 
-      {service.description && (
-        <p className="serviceCard__desc" title={service.description}>
-          {service.description}
-        </p>
-      )}
+      {/* remove buttons on owner view */}
+      {!hideActions && (
+        <footer className="svcCard__actions">
+          <button
+            type="button"
+            className="btn btn--ghost"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.location.href = `/services/${service._id}`;
+            }}
+          >
+            View
+          </button>
 
-      <footer className="serviceCard__footer">
-        <a
-          className="button button--subtle"
-          href={`/services/${service._id}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          View
-        </a>
-        <button
-          type="button"
-          className="button button--primary"
-          onClick={(e) => {
-            e.stopPropagation();
-            onQuickBook?.(service);
-          }}
-          aria-label={`Quick book ${service.title}`}
-        >
-          Quick book
-        </button>
-      </footer>
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.location.href = `/bookings/new?serviceId=${service._id}`;
+            }}
+          >
+            Quick book
+          </button>
+        </footer>
+      )}
     </article>
   );
 }
@@ -97,5 +83,5 @@ ServiceCard.propTypes = {
     reviewsCount: PropTypes.number,
   }).isRequired,
   onClick: PropTypes.func,
-  onQuickBook: PropTypes.func,
+  hideActions: PropTypes.bool,
 };

@@ -1,26 +1,27 @@
+// src/pages/Login.jsx
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-import { api } from '../services/api';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 import './Login.css';
 
-export default function Login({ onLoggedIn }) {
+export default function Login() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-  async function submit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
     setErr('');
     setLoading(true);
     try {
-      const res = await api.post('/api/auth/login', { email, password });
-      onLoggedIn?.(res.user);
-      navigate('/');
-    } catch (error) {
-      setErr(error.message || 'Login failed');
+      await login(email, password);
+      navigate('/me');
+    } catch (e) {
+      setErr(e.message || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -28,7 +29,7 @@ export default function Login({ onLoggedIn }) {
 
   return (
     <main className="auth">
-      <form className="auth__card" onSubmit={submit} noValidate>
+      <form className="auth__card" onSubmit={onSubmit} noValidate>
         <h2 className="auth__title">Login</h2>
 
         {err && <div className="auth__error">{err}</div>}
@@ -70,15 +71,11 @@ export default function Login({ onLoggedIn }) {
 
         <p className="auth__hint">
           New here?{' '}
-          <a className="link" href="/register">
+          <Link className="link" to="/register">
             Create an account
-          </a>
+          </Link>
         </p>
       </form>
     </main>
   );
 }
-
-Login.propTypes = {
-  onLoggedIn: PropTypes.func,
-};
