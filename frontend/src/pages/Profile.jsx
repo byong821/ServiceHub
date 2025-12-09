@@ -113,9 +113,6 @@ export default function Profile() {
           <div className="skeleton skeleton--profile" />
         ) : me ? (
           <div className="profile__card">
-            <div className="avatar" aria-hidden="true">
-              {me.username?.[0]?.toUpperCase()}
-            </div>
             <div className="profile__meta">
               <h2>{me.username}</h2>
               <p className="muted">{me.email}</p>
@@ -162,10 +159,10 @@ export default function Profile() {
         ) : filtered.length === 0 ? (
           <EmptyState
             title="No listings yet"
-            subtitle="Create your first service on the Home page."
+            subtitle="Create your first service listing now."
             action={
-              <Link to="/" className="btn btn--primary">
-                Create a Service
+              <Link to="/create-listing" className="btn btn--primary">
+                Create a Listing
               </Link>
             }
           />

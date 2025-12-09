@@ -41,6 +41,8 @@
   padding: 10px 14px;
   font-weight: 600;
   border: 1px solid transparent;
+  background: var(--primary);
+  color: #fff;
   transition:
     transform 0.06s ease,
     box-shadow 0.15s ease,
@@ -55,12 +57,13 @@
 }
 
 .button--primary {
-  background: var(--brand);
+  background: var(--primary);
   color: #fff;
   box-shadow: var(--shadow-md);
 }
+
 .button--primary:hover {
-  background: var(--brand-700);
+  background: var(--primary-dark);
 }
 
 .button--subtle {
@@ -108,10 +111,11 @@
 }
 
 .kicker {
-  font-size: var(--label);
+  font-size: var(--h3);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--text-subtle);
+  font-weight: 700;
 }
 .h1 {
   font-size: var(--h1);
@@ -201,6 +205,29 @@ a:hover {
 }
 a:visited {
   color: var(--text);
+}
+
+/* Ensure button links maintain button styling */
+a.btn,
+a.button {
+  background: var(--primary);
+  color: #fff;
+}
+a.btn:hover,
+a.button:hover {
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+a.btn--primary,
+a.button--primary {
+  background: var(--primary);
+  color: #fff;
+}
+a.btn--primary:hover,
+a.button--primary:hover {
+  background: var(--primary-dark);
+  color: #fff;
 }
 
 /* Only use .link class when you *want* a styled anchor */

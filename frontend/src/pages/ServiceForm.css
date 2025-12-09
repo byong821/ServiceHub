@@ -30,8 +30,8 @@
 .serviceForm .textarea,
 .serviceForm .select {
   width: 100%;
-  border: 1px solid var(--border);
-  background: #0f1420;
+  border: 2px solid var(--border);
+  background: var(--card);
   color: var(--text);
   border-radius: 10px;
   padding: 10px 12px;

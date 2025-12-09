@@ -1,5 +1,4 @@
 // src/components/Header.jsx
-import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import './Header.css';
@@ -29,10 +28,18 @@ export default function Header() {
           <Link to="/" className="nav__link">
             Home
           </Link>
+          <Link to="/browse" className="nav__link">
+            Browse
+          </Link>
           {user && (
-            <Link to="/me" className="nav__link">
-              My Listings
-            </Link>
+            <>
+              <Link to="/me" className="nav__link">
+                My Listings
+              </Link>
+              <Link to="/create-listing" className="nav__link">
+                Create a Listing
+              </Link>
+            </>
           )}
         </nav>
 

@@ -1,6 +1,5 @@
 // src/pages/ServiceDetail.jsx
 import { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { api } from '../services/api';
 import './ServiceDetail.css';
@@ -132,8 +131,12 @@ export default function ServiceDetail() {
           <dd>{svc.category}</dd>
         </div>
         <div>
-          <dt>Rate</dt>
-          <dd>${svc.hourlyRate}/hr</dd>
+          <dt>{svc.category === 'selling' ? 'Item Price' : 'Hourly Rate'}</dt>
+          <dd>
+            {svc.category === 'selling'
+              ? `$${svc.hourlyRate}`
+              : `$${svc.hourlyRate}/hr`}
+          </dd>
         </div>
         <div>
           <dt>Location</dt>

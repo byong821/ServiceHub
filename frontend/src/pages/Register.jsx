@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 import { api } from '../services/api';
 import './Register.css';
 
@@ -15,6 +16,7 @@ export default function Register({ onRegistered }) {
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const update = (k, v) => setForm((s) => ({ ...s, [k]: v }));
 
@@ -28,6 +30,8 @@ export default function Register({ onRegistered }) {
         gradYear: Number(form.gradYear || 0),
       });
       onRegistered?.(res.user);
+      // Auto-login after registration
+      setUser(res.user);
       navigate('/');
     } catch (error) {
       setErr(error.message || 'Registration failed');

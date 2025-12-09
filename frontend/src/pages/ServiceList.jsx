@@ -1,5 +1,5 @@
 // src/pages/ServiceList.jsx
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { api } from '../services/api';
 import ServiceCard from '../components/ServiceCard';
@@ -10,7 +10,10 @@ export default function ServiceList({
   school,
   min,
   max,
+  page = 1,
+  limit = 20,
   refreshId = 0,
+  providerFilter,
 }) {
   const [items, setItems] = useState([]);
   const [err, setErr] = useState('');
@@ -23,10 +26,24 @@ export default function ServiceList({
     if (school) p.set('location', school);
     if (min) p.set('min', min);
     if (max) p.set('max', max);
-    p.set('page', '1');
-    p.set('limit', '20');
+    if (providerFilter) p.set('providerId', providerFilter);
+    p.set('page', String(page));
+    p.set('limit', String(limit));
     return p.toString();
-  }, [query, category, school, min, max]);
+  }, [query, category, school, min, max, providerFilter, page, limit]);
+
+  // Track previous query string (filters) to detect filter changes
+  const prevQs = useRef(qs);
+
+  // Helper to parse query string into object (excluding page)
+  function parseQs(qs) {
+    const params = new URLSearchParams(qs);
+    const obj = {};
+    for (const [key, value] of params.entries()) {
+      if (key !== 'page') obj[key] = value;
+    }
+    return JSON.stringify(obj);
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -35,7 +52,21 @@ export default function ServiceList({
       setLoading(true);
       try {
         const data = await api.get(`/api/services?${qs}`);
-        if (!cancelled) setItems(data.items || []);
+        if (!cancelled) {
+          // Compare filters robustly (ignore page param)
+          const filters = parseQs(qs);
+          const prevFilters = parseQs(prevQs.current);
+          if (filters !== prevFilters) {
+            setItems(data.items || []);
+            prevQs.current = qs;
+          } else if (page > 1) {
+            setItems((old) => [...old, ...(data.items || [])]);
+            prevQs.current = qs;
+          } else {
+            setItems(data.items || []);
+            prevQs.current = qs;
+          }
+        }
       } catch (e) {
         if (!cancelled) setErr(e.message || 'Failed to load services');
       } finally {
@@ -45,7 +76,7 @@ export default function ServiceList({
     return () => {
       cancelled = true;
     };
-  }, [qs, refreshId]);
+  }, [qs, page, refreshId]);
 
   if (loading) {
     return (
@@ -76,5 +107,8 @@ ServiceList.propTypes = {
   school: PropTypes.string,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  page: PropTypes.number,
+  limit: PropTypes.number,
   refreshId: PropTypes.number,
+  providerFilter: PropTypes.string,
 };

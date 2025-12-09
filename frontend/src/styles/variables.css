@@ -47,9 +47,12 @@
   /* Shadows */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   /* Radii */
   --radius-xs: 4px;
@@ -76,8 +79,8 @@
   --space-16: 64px;
 
   /* Typography */
-  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    sans-serif;
+  --font-family-base:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-family-display: 'Poppins', 'Inter', sans-serif;
 
   --font-size-xs: 0.75rem;
@@ -259,8 +262,42 @@ a:focus-visible {
   border-color: var(--border-dark);
 }
 
+/* Form Group Styling */
+.form-group {
+  margin-bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+  display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+}
+
+.form-group-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .form-group-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Button Primitives */
-.btn {
+.btn,
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -268,8 +305,8 @@ a:focus-visible {
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius);
   border: 1px solid transparent;
-  background: var(--gray-200);
-  color: var(--text);
+  background: var(--primary);
+  color: var(--text-inverse);
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
@@ -302,25 +339,30 @@ a:focus-visible {
   cursor: not-allowed;
 }
 
-.btn--primary {
+.btn--primary,
+.button--primary {
   background: var(--primary);
   color: var(--text-inverse);
   border-color: var(--primary);
 }
 
-.btn--primary:hover:not(:disabled) {
+.btn--primary:hover:not(:disabled),
+.button--primary:hover:not(:disabled) {
   background: var(--primary-dark);
   border-color: var(--primary-dark);
 }
 
-.btn--success {
-  background: var(--success);
-  color: var(--text-inverse);
-  border-color: var(--success);
+.btn--secondary,
+.button--secondary {
+  background: var(--gray-200);
+  color: var(--text);
+  border-color: var(--gray-300);
 }
 
-.btn--success:hover:not(:disabled) {
-  background: #059669;
+.btn--secondary:hover:not(:disabled),
+.button--secondary:hover:not(:disabled) {
+  background: var(--gray-300);
+  border-color: var(--gray-400);
 }
 
 .btn--danger {
@@ -360,13 +402,14 @@ a:focus-visible {
 .select,
 .textarea {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border: 2px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
   color: var(--text);
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
   transition:
     border-color var(--transition-fast) ease,
     box-shadow var(--transition-fast) ease,
@@ -377,6 +420,7 @@ a:focus-visible {
 .select:hover,
 .textarea:hover {
   border-color: var(--border-dark);
+  background: var(--card);
 }
 
 .input:focus,
@@ -392,9 +436,19 @@ a:focus-visible {
   color: var(--text-tertiary);
 }
 
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+}
+
 .textarea {
   resize: vertical;
   min-height: 100px;
+  font-family: var(--font-family-base);
 }
 
 /* Labels */

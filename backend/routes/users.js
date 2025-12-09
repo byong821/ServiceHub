@@ -4,6 +4,26 @@ import { findById, updateUser } from '../models/users.js';
 
 const router = Router();
 
+// Public endpoint to view any user's public profile
+router.get('/public/:id', async (req, res, next) => {
+  try {
+    const user = await findById(req.params.id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    // Return only public user info
+    res.json({
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        major: user.major,
+        gradYear: user.gradYear,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:id', authRequired, async (req, res, next) => {
   try {
     const user = await findById(req.params.id);

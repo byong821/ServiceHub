@@ -1,81 +1,154 @@
 /* ---- Card container (keep your existing) ---- */
 .svcCard {
-  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
-  cursor: pointer;
+  overflow: hidden;
+  transition:
+    transform var(--transition-fast) ease,
+    box-shadow var(--transition-fast) ease,
+    border-color var(--transition-fast) ease;
 }
 
-/* optional actions row */
-.svcCard__actions {
+.svcCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-dark);
+}
+
+.svcCard__link {
+  display: block;
+  padding: var(--space-4);
+  color: inherit;
+  text-decoration: none;
+  flex: 1;
+}
+
+/* ---- Header ---- */
+.svcCard__header {
+  margin-bottom: var(--space-2);
+}
+
+.svcCard__rating {
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
-}
-.svcCard:not(:has(.svcCard__actions)) {
-  padding-bottom: 16px;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+  color: var(--warning);
+  font-size: 0.875rem;
 }
 
-/* ---- Meta row (single source of truth) ---- */
+.svcCard__ratingCount {
+  color: var(--text-secondary);
+  margin-left: var(--space-1);
+  font-size: 0.75rem;
+}
+
+.svcCard__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  color: var(--text);
+  line-height: var(--line-height-tight);
+}
+
+.svcCard__badge {
+  display: inline-block;
+  margin-left: var(--space-2);
+}
+
+/* ---- Description ---- */
+.svcCard__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: var(--space-2) 0;
+  line-height: var(--line-height-normal);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Meta row ---- */
 .svcCard__meta {
   display: flex;
   align-items: center;
-  gap: 12px; /* spacing between category, rate, dot, location */
-  color: var(--text-weak);
-  margin-top: 10px;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
 }
 
 .svcCard__rate {
-  font-weight: 600;
-  color: var(--text); /* stands out slightly */
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
 }
 
 .svcCard__dot {
   opacity: 0.5;
-  margin: 0 -4px; /* tightens the dot to surrounding items */
+  margin: 0 -2px;
 }
 
 .svcCard__loc {
-  color: var(--text-weak);
+  color: var(--text-secondary);
 }
 
-/* Category chip */
+/* ---- Provider Section ---- */
+.svcCard__provider {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+  margin-top: auto;
+}
+
+.svcCard__providerLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--primary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast) ease;
+}
+
+.svcCard__providerLink:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.svcCard__providerLabel {
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+.svcCard__providerName {
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ---- Chip ---- */
 .chip {
   display: inline-flex;
   align-items: center;
   padding: 2px 10px;
   border-radius: 999px;
-  background: var(--panel);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   font-size: 12px;
   line-height: 20px;
+  color: var(--text-secondary);
 }
 
 /* Prevent UA link styles inside cards */
 .svcCard a {
   color: inherit;
-  text-decoration: none;
 }
 .svcCard a:hover {
   text-decoration: none;
-}
-
-/* Space out the meta line: $20/hr · Northeastern · tech */
-.svcCard__meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--text-weak);
-  margin-top: 8px;
-}
-.svcCard__rate {
-  font-weight: 700;
-  color: var(--text);
-}
-.svcCard__dot {
-  opacity: 0.5;
-}
-.svcCard__loc {
-  color: var(--text-weak);
 }

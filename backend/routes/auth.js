@@ -23,11 +23,18 @@ router.post('/register', async (req, res, next) => {
     req.session.userId = String(user._id);
     res.status(201).json({ user });
   } catch (err) {
+    const error = new Error();
     if (err.code === 11000) {
-      err.status = 400;
-      err.message = 'Username or email already in use';
+      error.statusCode = 400;
+      error.message = 'Username or email already in use';
+    } else if (err.message && err.message.includes('Password must be')) {
+      error.statusCode = 400;
+      error.message = err.message;
+    } else {
+      error.statusCode = 500;
+      error.message = err.message || 'Registration failed';
     }
-    next(err);
+    next(error);
   }
 });
 

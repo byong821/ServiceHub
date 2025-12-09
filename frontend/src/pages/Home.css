@@ -8,16 +8,26 @@
   );
 }
 .hero__inner {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: var(--space-4);
+  max-width: 900px;
+  margin: 0 auto;
+}
+/* Centered wrapper for search bar */
+.searchBarWrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
 /* Search / Filters row */
 .searchBar {
-  display: grid;
-  grid-template-columns: 1.3fr 0.9fr 0.6fr 0.6fr;
-  gap: var(--space-3);
-  padding: var(--space-3);
+  display: flex;
+  gap: 12px;
+  padding: 12px;
   border-radius: var(--radius);
   background: var(--card);
   border: 1px solid var(--border);
@@ -58,7 +68,8 @@
 /* Responsive adjustments */
 @media (max-width: 960px) {
   .searchBar {
-    grid-template-columns: 1fr 1fr;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .home__grid {
     grid-template-columns: 1fr;

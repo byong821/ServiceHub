@@ -53,6 +53,14 @@ app.use('/api', (_req, res) =>
   res.status(404).json({ error: 'Route not found' })
 );
 
+// ---------- Error handling middleware ----------
+app.use((err, _req, res, _next) => {
+  console.error('Error:', err);
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || 'Internal server error';
+  res.status(status).json({ error: message });
+});
+
 // ---------- Serve React in production ONLY ----------
 if (process.env.NODE_ENV === 'production') {
   const __filename = fileURLToPath(import.meta.url);

@@ -124,6 +124,16 @@ export async function listServicesByProvider(
   const pipeline = [
     { $match: filter },
 
+    // Join with users to get provider info
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'providerId',
+        foreignField: '_id',
+        as: 'provider',
+      },
+    },
+
     // Join with reviews to get rating data
     {
       $lookup: {
@@ -134,7 +144,7 @@ export async function listServicesByProvider(
       },
     },
 
-    // Calculate average rating and count
+    // Calculate average rating and count, and extract provider name
     {
       $addFields: {
         reviewsCount: { $size: '$reviews' },
@@ -145,12 +155,13 @@ export async function listServicesByProvider(
             else: 0,
           },
         },
+        providerName: { $arrayElemAt: ['$provider.username', 0] },
       },
     },
 
-    // Remove the reviews array
+    // Remove the reviews and provider arrays
     {
-      $project: { reviews: 0 },
+      $project: { reviews: 0, provider: 0 },
     },
 
     { $sort: { updatedAt: -1, createdAt: -1 } },
@@ -216,6 +227,16 @@ export async function searchServices({
   const pipeline = [
     firstMatch,
 
+    // Join with users to get provider info
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'providerId',
+        foreignField: '_id',
+        as: 'provider',
+      },
+    },
+
     // Join with reviews to get rating data
     {
       $lookup: {
@@ -226,7 +247,7 @@ export async function searchServices({
       },
     },
 
-    // Calculate average rating and count
+    // Calculate average rating and count, and extract provider name
     {
       $addFields: {
         reviewsCount: { $size: '$reviews' },
@@ -237,12 +258,13 @@ export async function searchServices({
             else: 0,
           },
         },
+        providerName: { $arrayElemAt: ['$provider.username', 0] },
       },
     },
 
-    // Remove the reviews array (we only need the aggregated data)
+    // Remove the reviews and provider arrays (we only need the aggregated data)
     {
-      $project: { reviews: 0 },
+      $project: { reviews: 0, provider: 0 },
     },
 
     { $sort: q ? { score: { $meta: 'textScore' } } : { createdAt: -1 } },
