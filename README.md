@@ -2,20 +2,20 @@
 
 **A Student Services Marketplace for Campus Communities**
 
+---
+
 ## 👥 Authors
 
-**Eric Fu** - [GitHub](https://github.com/ericfu4)  
-**Brandan Yong** - [GitHub](https://github.com/byong821)
+- **Eric Fu** - [GitHub](https://github.com/ericfu4)
+- **Brandan Yong** - [GitHub](https://github.com/byong821)
 
 ---
 
 ## 🎓 Class Information
 
-**Course:** CS5610 - Web Development  
+**Course:** CS5610 - Web Development (Fall 2025)  
 **Institution:** Northeastern University  
-**Semester:** Fall 2024  
-
-Class Link: https://johnguerra.co/classes/webDevelopment_online_fall_2025/
+**Class Link:** [CS5610 Web Development Online](https://johnguerra.co/classes/webDevelopment_online_fall_2025/)
 
 ---
 
@@ -29,159 +29,367 @@ ServiceHub is a full-stack web application designed to connect students on campu
 - **Leave reviews** and ratings for completed services
 - **Manage their listings** through a personalized profile dashboard
 
-The goal is to create a trusted, student-only marketplace that makes it easy to find help with tutoring, moving, tech support, photography, and more - all within the campus community.
+The goal is to create a trusted, student-only marketplace that makes it easy to find help with tutoring, moving, tech support, photography, and more—all within the campus community.
 
-**Live Demo:** https://servicehub-06p9.onrender.com
+**Live Demo:** [ServiceHub on Render](https://servicehub-06p9.onrender.com)
 
 ---
 
 ## 📸 Screenshots
 
-### Home Page
+### Home Page - Service Discovery
+
 ![Home Page](./screenshot1.png)
 
-### Service Detail
+### Service Detail - View Service Information
+
 ![Service Detail](./screenshot3.png)
 
-### My Listings
+### My Listings - Manage Your Services
+
 ![My Listings](./screenshot2.png)
 
 ---
 
-## Video Demo 
-Link: https://youtu.be/Wk3z3jF6QTQ
+## 🎬 Video Demo
+
+**Duration:** ~5 minutes  
+**Link:** [ServiceHub Demo on YouTube](https://youtu.be/Wk3z3jF6QTQ)
+
+---
 
 ## 🛠️ Technology Stack
 
 **Frontend:**
-- React 18
-- React Router v6
-- Native Fetch API
-- CSS3 with custom styling
+
+- React 18 with Hooks
+- React Router v7 for client-side routing
+- Modern CSS3 with CSS Variables and Flexbox/Grid
+- Responsive design (mobile-first approach)
 
 **Backend:**
-- Node.js
-- Express.js
+
+- Node.js runtime
+- Express.js web framework
 - MongoDB with native driver
-- Express Session for authentication
+- Express-session for authentication
+- bcrypt for password hashing
+
+**Database:**
+
+- MongoDB Atlas (cloud)
+- 2+ collections with CRUD operations
+- 1000+ synthetic records for testing
 
 **Deployment:**
+
 - Frontend & Backend: Render
 - Database: MongoDB Atlas
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- ✅ User authentication (register, login, logout)
-- ✅ Create and manage service listings
-- ✅ Browse services with search functionality
-- ✅ Filter by category, school, and price range
-- ✅ View detailed service information with provider contact
-- ✅ Leave reviews and ratings (authenticated users only)
-- ✅ Star ratings display on service cards
-- ✅ Responsive design for mobile and desktop
-- ✅ Session-based authentication with secure cookies
-- ✅ Input validation and error handling
+- ✅ **User Authentication** - Secure register, login, and logout with sessions
+- ✅ **Service Listings** - Create, read, update, and delete service listings
+- ✅ **Search & Filter** - Find services by keywords, category, school, and price
+- ✅ **Service Details** - View comprehensive service information and provider details
+- ✅ **Reviews & Ratings** - Leave reviews with star ratings (5-star system)
+- ✅ **User Profiles** - Manage your listings and profile information
+- ✅ **Responsive Design** - Works on mobile, tablet, and desktop
+- ✅ **Accessible UI** - Keyboard navigation, ARIA labels, semantic HTML
+- ✅ **Input Validation** - Client and server-side validation
+- ✅ **Error Handling** - Graceful error messages and recovery
 
 ---
 
 ## 📦 Project Structure
+
 ```
 ServiceHub/
-├── backend/
-│   ├── models/           # Database models (users, services, reviews)
-│   ├── routes/           # API routes
-│   ├── middleware/       # Auth middleware
-│   ├── utils/            # Database connection, indexing
-│   ├── seed/             # Database seeding scripts
-│   └── server.js         # Express server entry point
-├── frontend/
-│   ├── public/           # Static assets
-│   └── src/
-│       ├── components/   # Reusable React components
-│       ├── pages/        # Page components
-│       ├── context/      # Auth context
-│       ├── services/     # API service layer
-│       └── App.js        # Main app component
+├── backend/                 # Express.js API
+│   ├── models/              # Database schemas
+│   │   ├── users.js
+│   │   ├── services.js
+│   │   └── reviews.js
+│   ├── routes/              # API route handlers
+│   │   ├── auth.js
+│   │   ├── users.js
+│   │   ├── services.js
+│   │   └── reviews.js
+│   ├── middleware/          # Express middleware
+│   │   └── auth.js
+│   ├── utils/               # Utilities
+│   │   ├── db.js            # Database connection
+│   │   └── createIndexes.js
+│   ├── seed/                # Database seeding
+│   │   ├── index.js
+│   │   ├── seedUsers.js
+│   │   ├── seedServices.js
+│   │   └── seedReviews.js
+│   ├── .env                 # Environment variables (git-ignored)
+│   ├── .eslintrc.json       # ESLint configuration
+│   ├── .prettierrc.json     # Prettier configuration
+│   ├── package.json
+│   └── server.js            # Express server entry point
+├── frontend/                # React app
+│   ├── public/              # Static files
+│   ├── src/
+│   │   ├── components/      # Reusable components
+│   │   │   ├── Header.jsx
+│   │   │   ├── ServiceCard.jsx
+│   │   │   ├── ReviewCard.jsx
+│   │   │   ├── Loading.jsx
+│   │   │   └── ErrorBoundary.jsx
+│   │   ├── pages/           # Page components
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── ServiceList.jsx
+│   │   │   ├── ServiceForm.jsx
+│   │   │   ├── ServiceDetail.jsx
+│   │   │   ├── ReviewsList.jsx
+│   │   │   └── Profile.jsx
+│   │   ├── context/         # React context (auth)
+│   │   ├── services/        # API client
+│   │   ├── styles/          # Global styles
+│   │   │   └── variables.css
+│   │   ├── App.js
+│   │   └── index.js
+│   ├── .env                 # Environment variables (git-ignored)
+│   ├── .eslintrc.json       # ESLint configuration
+│   ├── .prettierrc.json     # Prettier configuration
+│   ├── package.json
+│   └── public/index.html
+├── .eslintrc.json           # Root ESLint config
+├── .prettierrc.json         # Root Prettier config
+├── LICENSE                  # MIT License
 └── README.md
 ```
 
 ---
 
-## 🚀 Instructions to Build and Run Locally
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- Git
+- **Node.js** v18+ ([download](https://nodejs.org/))
+- **MongoDB** (either [local](https://docs.mongodb.com/manual/installation/) or [Atlas account](https://www.mongodb.com/cloud/atlas))
+- **Git**
 
-### 1. Clone the Repository
+### Installation & Setup
+
+#### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/byong821/ServiceHub.git
 cd ServiceHub
 ```
 
-### 2. Backend Setup
+#### 2. Backend Setup
+
 ```bash
 cd backend
 
 # Install dependencies
 npm install
 
-# Create environment file
+# Create .env file from example
 cp .env.example .env
 
-# Update .env with your configuration:
-# MONGODB_URI=mongodb://localhost:27017/servicehub
-# SESSION_SECRET=your-secret-key-here
-# PORT=5001
+# Edit .env and configure:
+# - MONGODB_URI: Your MongoDB connection string
+# - SESSION_SECRET: A random secret string for sessions
+# - PORT: 5001 (default)
 
-# Seed the database with sample data
-node seed/index.js
+# Seed database with 400+ users and 600+ services
+npm run seed
 
 # Start the backend server
 npm start
 ```
 
-Backend will run on `http://localhost:5001`
+**Backend runs on:** `http://localhost:5001`
 
-### 3. Frontend Setup
+#### 3. Frontend Setup
 
-Open a **new terminal window:**
 ```bash
+# Open a NEW terminal window
 cd frontend
 
 # Install dependencies
 npm install
 
-# Create environment file (optional for local dev)
-echo "REACT_APP_API_URL=" > .env
-
-# Start the React development server
+# Start the development server
 npm start
 ```
 
-Frontend will run on `http://localhost:3000`
+**Frontend runs on:** `http://localhost:3000`  
+_Note: The React app will automatically proxy API requests to the backend_
 
-### 4. Access the Application
+#### 4. Access the Application
 
-Open your browser and navigate to:
 ```
 http://localhost:3000
 ```
 
-### 5. Test Accounts (After Seeding)
+---
 
-The seed creates 400 test users. You can:
-- Register a new account, OR
-- Login with any seeded user (password is `password123` for all seeded accounts)
+## 👤 Demo Accounts
+
+After running `npm run seed`, you can login with:
+
+- **Any seeded user**
+- **Password:** `password123` (for all seeded accounts)
+- **Or register a new account**
+
+---
+
+## 🔒 Security Features
+
+- ✅ **Password Hashing** - bcrypt with salt rounds
+- ✅ **Session-based Auth** - Express-session with secure cookies
+- ✅ **CSRF Protection** - Session validation
+- ✅ **No Exposed Secrets** - All credentials in `.env` (git-ignored)
+- ✅ **Input Validation** - Server-side validation for all inputs
+- ✅ **HTTPS Ready** - Deployment on Render with HTTPS
+
+---
+
+## ♿ Accessibility
+
+ServiceHub is designed with accessibility in mind:
+
+- ✅ **Keyboard Navigation** - All features accessible via keyboard
+- ✅ **ARIA Labels** - Semantic HTML with proper ARIA attributes
+- ✅ **Semantic HTML** - Proper use of `<button>`, `<nav>`, `<main>`, `<section>`, etc.
+- ✅ **Focus Indicators** - Visible focus states for interactive elements
+- ✅ **Color Contrast** - Meeting WCAG AA standards
+- ✅ **Screen Reader Support** - Tested with screen readers
+
+**Run Accessibility Tests:**
+
+```bash
+# Frontend accessibility audit
+npm run audit
+
+# Or use Lighthouse in Chrome DevTools
+# - Open DevTools (F12)
+# - Go to "Lighthouse" tab
+# - Run accessibility audit
+```
+
+---
+
+## 💾 Database
+
+### Collections
+
+**users** - User accounts and profiles
+
+```javascript
+{
+  _id: ObjectId,
+  username: String,
+  email: String (unique),
+  password: String (hashed),
+  major: String,
+  gradYear: Number,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+**services** - Service listings
+
+```javascript
+{
+  _id: ObjectId,
+  title: String,
+  description: String,
+  category: String,
+  hourlyRate: Number,
+  location: String,
+  providerId: ObjectId (ref: users),
+  providerName: String,
+  providerEmail: String,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+**reviews** - Service reviews and ratings
+
+```javascript
+{
+  _id: ObjectId,
+  serviceId: ObjectId (ref: services),
+  providerId: ObjectId (ref: users),
+  reviewerId: ObjectId (ref: users),
+  rating: Number (1-5),
+  comment: String,
+  providerResponse: String,
+  createdAt: Date
+}
+```
+
+### Seeded Data
+
+The database includes:
+
+- **400+ users** with realistic profiles
+- **600+ services** across 15 categories
+- **1000+ reviews** with ratings (1-5 stars)
+
+Run seeding: `npm run seed` in the `backend` directory
+
+---
+
+## 📋 Development Workflow
+
+### Code Quality
+
+- **ESLint** - Linting configuration for consistent code style
+- **Prettier** - Code formatting (auto-format on save)
+
+Run checks:
+
+```bash
+# Lint code
+npm run lint
+
+# Format code
+npm run format
+```
+
+### Component Architecture
+
+- **Functional Components** - React Hooks (useState, useEffect, useContext)
+- **PropTypes** - Type checking for all components
+- **CSS Modules** - Organized styles per component
+- **Error Boundary** - Graceful error handling
 
 ---
 
 ## 📄 License
 
-MIT License - see LICENSE file for details
+This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
 
 ---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit pull requests or open issues.
+
+---
+
+## 📞 Support
+
+For questions or issues, please:
+
+1. Check the [Issues](https://github.com/byong821/ServiceHub/issues) page
+2. Contact: [Eric Fu](https://github.com/ericfu4) or [Brandan Yong](https://github.com/byong821)
+
+---
+
+**Built with ❤️ for CS5610 - Web Development**
