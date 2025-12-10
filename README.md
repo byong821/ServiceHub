@@ -126,7 +126,10 @@ ServiceHub/
 │   │   ├── index.js
 │   │   ├── seedUsers.js
 │   │   ├── seedServices.js
-│   │   └── seedReviews.js
+│   │   ├── seedReviews.js
+│   │   └── data/            # Seed data
+│   │       ├── users.json
+│   │       ├── reviews.json
 │   ├── .env                 # Environment variables (git-ignored)
 │   ├── .eslintrc.json       # ESLint configuration
 │   ├── .prettierrc.json     # Prettier configuration
@@ -134,33 +137,55 @@ ServiceHub/
 │   └── server.js            # Express server entry point
 ├── frontend/                # React app
 │   ├── public/              # Static files
+│   │   ├── index.html
+│   │   └── favicon.png
 │   ├── src/
 │   │   ├── components/      # Reusable components
 │   │   │   ├── Header.jsx
+│   │   │   ├── Header.css
 │   │   │   ├── ServiceCard.jsx
+│   │   │   ├── ServiceCard.css
 │   │   │   ├── ReviewCard.jsx
 │   │   │   ├── Loading.jsx
+│   │   │   ├── Loading.css
 │   │   │   └── ErrorBoundary.jsx
 │   │   ├── pages/           # Page components
 │   │   │   ├── Home.jsx
+│   │   │   ├── Home.css
 │   │   │   ├── Login.jsx
+│   │   │   ├── Login.css
 │   │   │   ├── Register.jsx
+│   │   │   ├── Register.css
 │   │   │   ├── ServiceList.jsx
+│   │   │   ├── ServiceList.css
 │   │   │   ├── ServiceForm.jsx
+│   │   │   ├── ServiceForm.css
 │   │   │   ├── ServiceDetail.jsx
+│   │   │   ├── ServiceDetail.css
 │   │   │   ├── ReviewsList.jsx
-│   │   │   └── Profile.jsx
+│   │   │   ├── ReviewsList.css
+│   │   │   ├── Profile.jsx
+│   │   │   ├── Profile.css
+│   │   │   ├── BrowseServices.jsx
+│   │   │   ├── BrowseServices.css
+│   │   │   ├── CreateListing.jsx
+│   │   │   ├── CreateListing.css
+│   │   │   ├── ProviderProfile.jsx
+│   │   │   ├── ProviderProfile.css
 │   │   ├── context/         # React context (auth)
+│   │   │   └── authContext.jsx
 │   │   ├── services/        # API client
+│   │   │   └── api.js
 │   │   ├── styles/          # Global styles
 │   │   │   └── variables.css
 │   │   ├── App.js
-│   │   └── index.js
+│   │   ├── App.css
+│   │   ├── index.js
+│   │   ├── index.css
 │   ├── .env                 # Environment variables (git-ignored)
 │   ├── .eslintrc.json       # ESLint configuration
 │   ├── .prettierrc.json     # Prettier configuration
 │   ├── package.json
-│   └── public/index.html
 ├── .eslintrc.json           # Root ESLint config
 ├── .prettierrc.json         # Root Prettier config
 ├── LICENSE                  # MIT License
