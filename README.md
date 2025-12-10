@@ -67,6 +67,9 @@ The goal is to create a trusted, student-only marketplace that makes it easy to 
 ## Usability Report 
 **Link:** [Usability Report Document](https://northeastern-my.sharepoint.com/:w:/g/personal/fu_er_northeastern_edu/IQA61-iu1am0QospmtgsGhm9ARxfDyyfDkr2BbOffYZg70w?e=5aEWyd)
 
+### Post-Test Likert Questionnaire Responses
+![LikertResponses](./likertVis.png)
+
 ## 🛠️ Technology Stack
 
 **Frontend:**
