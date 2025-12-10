@@ -41,13 +41,19 @@ The goal is to create a trusted, student-only marketplace that makes it easy to 
 
 ![Home Page](./screenshot1.png)
 
-### Service Detail - View Service Information
+### Browse Services 
 
-![Service Detail](./screenshot3.png)
+![Browse Services](./screenshot2.png)
 
 ### My Listings - Manage Your Services
 
-![My Listings](./screenshot2.png)
+![My Listings](./screenshot3.png)
+
+### Create a Listing 
+![Create Listings](./screenshot4.png)
+
+### Lighthouse Report
+![Lighthouse](./accessibilityReport.png)
 
 ---
 
@@ -57,6 +63,9 @@ The goal is to create a trusted, student-only marketplace that makes it easy to 
 **Link:** [ServiceHub Demo on YouTube](https://youtu.be/Wk3z3jF6QTQ)
 
 ---
+
+## Usability Report 
+**Link:** [Usability Report Document](https://northeastern-my.sharepoint.com/:w:/g/personal/fu_er_northeastern_edu/IQA61-iu1am0QospmtgsGhm9ARxfDyyfDkr2BbOffYZg70w?e=5aEWyd)
 
 ## 🛠️ Technology Stack
 
